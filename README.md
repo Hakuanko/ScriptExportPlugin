@@ -1,8 +1,8 @@
 # ScriptExportPlugin for YMM4
 
-AI（Claude）を使って作りました。
 ゆっくりMovieMaker4 (YMM4) のタイムライン上にあるボイスアイテムを、  
 **YMM4 台本 TXT 形式**のテキストファイルとしてエクスポートするプラグインです。
+AI（Claude）を使って作りました。
 
 ---
 
