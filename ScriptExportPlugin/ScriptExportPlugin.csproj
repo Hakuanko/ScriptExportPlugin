@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ScriptExportPlugin</AssemblyName>
+    <RootNamespace>ScriptExportPlugin</RootNamespace>
+  </PropertyGroup>
+
+  <!--
+    ============================================================
+    YMM4のインストールフォルダのパスをここに設定してください
+    末尾の \ を忘れずに！
+    ============================================================
+  -->
+  <PropertyGroup>
+    <YMM4DirPath>C:\YukkuriMovieMaker_v4_Lite\</YMM4DirPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- YMM4本体のPlugin DLLを参照 -->
+    <Reference Include="YukkuriMovieMaker.Plugin">
+      <HintPath>$(YMM4DirPath)YukkuriMovieMaker.Plugin.dll</HintPath>
+      <!-- DLL はランタイムに YMM4 本体が提供するため出力に含めない -->
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- ビルド後にYMM4のプラグインフォルダへ自動コピー -->
+  <Target Name="CopyToPlugin" AfterTargets="Build">
+    <MakeDir Directories="$(YMM4DirPath)user\plugin\ScriptExportPlugin\" />
+    <Copy
+      SourceFiles="$(OutputPath)$(AssemblyName).dll"
+      DestinationFolder="$(YMM4DirPath)user\plugin\ScriptExportPlugin\"
+      SkipUnchangedFiles="true" />
+    <Message Text="✓ コピー完了: $(YMM4DirPath)user\plugin\ScriptExportPlugin\$(AssemblyName).dll" Importance="high" />
+  </Target>
+
+</Project>
